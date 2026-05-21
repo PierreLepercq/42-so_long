@@ -6,12 +6,14 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/08 13:58:39 by plepercq          #+#    #+#             */
-/*   Updated: 2026/05/08 15:27:51 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/05/21 19:07:52 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_SPLIT_H
 # define FT_SPLIT_H
+
+# include <stddef.h>
 
 int		splitcount(const char *str, char sep);
 int		substrlen(const char *s, char sep);

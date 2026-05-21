@@ -6,23 +6,30 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 12:09:52 by plepercq          #+#    #+#             */
-/*   Updated: 2026/05/19 16:15:18 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/05/21 20:16:57 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
+# include <stdbool.h>
+
+# define PASS	0
+# define FAIL 	1
+
 /*	ERRORS	*/
+# define ERR_MEM_ALLOC				"Memory allocation failed"
+# define ERR_OPEN_FILE 				"Unable to open file"
 # define ERR_FILE_NOT_PROVIDED 		"File not provided"
 # define ERR_MAP_FILE_EXT 			"File extension must be '.ber'"
-# define ERR_MAP_OPEN_FILE 			"Unable to open map file"
-# define ERR_MAP_IS_NOT_RECT 		"Map is not rectangular"
+# define ERR_MAP_NOT_RECT 			"Map is not rectangular"
 # define ERR_MAP_BAD_CONTENT 		"Map content is not valid"
 # define ERR_MAP_NOT_ENCLOSED 		"Map is not enclosed"
-# define ERR_MAP_TILE_NOT_UNIQUE 	"Number of unique tiles is wrong"
+# define ERR_PLAYER_NOT_UNIQUE 		"Zero or more than one tile player"
+# define ERR_EXIT_NOT_UNIQUE 		"Zero or more than one tile exit"
 # define ERR_MAP_ELEM_NOT_REACHABLE	"Map elements are not reachable"
-# define ERR_MAP_NO_COLLECTIBLES	"Map do not have any collectibles"
+# define ERR_NO_COLLECTIBLES		"Map do not have any collectibles"
 # define ERR_TXS_NOT_LOADED			"Textures load failed"
 # define ERR_TXS_SIZE_NOT_CORRECT	"Textures size are not 64x64 pixels"
 # define ERR_MLX_INIT_FAILED		"MLX initialisation failed"
@@ -75,6 +82,7 @@ enum {
 # define KEY_UP				65362
 # define KEY_RIGHT			65363
 # define KEY_DOWN			65364
+# define K_ESC				65307
 
 typedef struct s_coord2d
 {
@@ -107,7 +115,8 @@ typedef struct s_texture
 	int			width;
 }				t_texture;
 
-typedef struct s_vars {
+typedef struct s_vars
+{
 	void		*mlx;
 	void		*win;
 }				t_vars;
@@ -120,5 +129,34 @@ typedef struct s_game
 	t_map		map;
 	t_player	player;
 }				t_game;
+
+//	PRINT ERROR
+void		print_error(const char *err_msg);
+
+//	COORD2D
+t_coord2d	coord2d(int x, int y);
+
+//	MAP UTILS
+int			char_count(char *str, char c);
+int			get_dimensions(char *ascii, int *height, int *width);
+int			map_count(char **grid, char tile);
+t_coord2d	map_find(char **grid, char tile);
+
+//	MAP FIND
+char		**gridcpy(char **strs);
+bool		flood_fill(char **grid, t_coord2d pos, t_coord2d target);
+bool		is_reachable(char **grid, t_coord2d start, t_coord2d target);
+
+//	MAP CHECKS
+bool		is_suffix_valid(char *s, char *suffix);
+bool		is_map_content_valid(char *ascii);
+bool		is_map_enclosed(char *ascii, int height, int width);
+bool		is_map_playable(char *ascii);
+bool		is_map_valid(t_map *map, char *ascii);
+
+//	MAP
+void		map_init(t_map *map);
+int			map_build(t_map *map, char *ascii);
+int			map_load(t_map *map, char *map_file);
 
 #endif

@@ -1,24 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   coord.h                                            :+:      :+:    :+:   */
+/*   coord2d.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/14 15:32:50 by plepercq          #+#    #+#             */
-/*   Updated: 2026/05/13 14:57:49 by plepercq         ###   ########.fr       */
+/*   Created: 2026/05/21 18:28:03 by plepercq          #+#    #+#             */
+/*   Updated: 2026/05/21 18:28:17 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef COORD_H
-# define COORD_H
+#include "so_long.h"
 
-typedef struct s_coord2d
+t_coord2d	coord2d(int x, int y)
 {
-	int		x;
-	int		y;
-}			t_coord2d;
+	t_coord2d	coord;
 
-t_coord2d	coord2d(int x, int y);
-
-#endif
+	coord.x = x;
+	coord.y = y;
+	return (coord);
+}
