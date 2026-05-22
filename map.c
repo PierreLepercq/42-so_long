@@ -6,7 +6,7 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/21 18:12:32 by plepercq          #+#    #+#             */
-/*   Updated: 2026/05/21 20:19:10 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/05/22 01:27:52 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,22 @@
 #include "so_long.h"
 #include "ft_split.h"
 #include "read_file.h"
+
+#include <stdio.h>
+
+void	map_print(char **grid)
+{
+	int	y;
+
+	y = 0;
+	while (grid[y])
+	{
+		printf("%s\n", grid[y]);
+		y++;
+	}
+}
+
+
 
 void	map_init(t_map *map)
 {
@@ -30,13 +46,17 @@ void	map_init(t_map *map)
 
 int	map_build(t_map *map, char *ascii)
 {
-	if (!is_map_ascii_valid(ascii))
+	if (!is_map_valid(ascii))
 		return (FAIL);
 	map->grid = ft_split(ascii, '\n');
 	if (!map->grid)
 		return (FAIL);
 	get_dimensions(ascii, &map->height, &map->width);
 	map->nbr_collectibles = char_count(ascii, TILE_COLLECTIBLE);
+	map->start = map_find(map->grid, TILE_PLAYER);
+	map->exit = map_find(map->grid, TILE_EXIT);
+	map->grid[map->start.y][map->start.x] = TILE_EMPTY;
+	map_print(map->grid);
 	return (PASS);
 }
 
@@ -58,4 +78,10 @@ int	map_load(t_map *map, char *map_file)
 	build = map_build(map, ascii);
 	free(ascii);
 	return (build);
+}
+
+void	map_clean(t_map *map)
+{
+	freestrs(map->grid, map->height);
+	map_init(map);
 }

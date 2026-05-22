@@ -6,13 +6,15 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/21 18:30:19 by plepercq          #+#    #+#             */
-/*   Updated: 2026/05/21 20:13:23 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/05/22 00:57:25 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
+#include <stdlib.h>
 #include <stdbool.h>
 #include "so_long.h"
+#include "ft_split.h"
 #include "ft_string.h"
 
 bool	is_suffix_valid(char *s, char *suffix)
@@ -69,7 +71,7 @@ bool	is_map_enclosed(char *ascii, int height, int width)
 	return (true);
 }
 
-bool	is_map_playable(char *ascii)
+bool	is_map_playable(char *ascii, int height)
 {
 	int			y;
 	int			x;
@@ -81,7 +83,7 @@ bool	is_map_playable(char *ascii)
 		return (print_error(ERR_MEM_ALLOC), false);
 	start = map_find(grid, TILE_PLAYER);
 	if (!is_reachable(grid, start, map_find(grid, TILE_EXIT)))
-		return (free(grid), false);
+		return (freestrs(grid, height), false);
 	y = 0;
 	while (grid[y])
 	{
@@ -90,15 +92,15 @@ bool	is_map_playable(char *ascii)
 		{
 			if (grid[y][x] == TILE_COLLECTIBLE
 				&& !is_reachable(grid, coord2d(x, y), start))
-				return (free(grid), false);
+				return (freestrs(grid, height), false);
 			x++;
 		}
 		y++;
 	}
-	return (free(grid), true);
+	return (freestrs(grid, height), true);
 }
 
-bool	is_map_ascii_valid(char *ascii)
+bool	is_map_valid(char *ascii)
 {
 	int	h;
 	int	w;
@@ -119,7 +121,7 @@ bool	is_map_ascii_valid(char *ascii)
 		return (print_error(ERR_MAP_NOT_ENCLOSED), false);
 	if (h * TEX_SIZE >= WIN_MAX_HEIGHT || w * TEX_SIZE >= WIN_MAX_WIDTH)
 		return (print_error(ERR_MAP_TOO_BIG), false);
-	if (!is_map_playable(ascii))
+	if (!is_map_playable(ascii, h))
 		return (print_error(ERR_MAP_TOO_BIG), false);
 	return (true);
 }

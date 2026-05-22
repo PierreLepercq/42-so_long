@@ -6,7 +6,7 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 12:09:52 by plepercq          #+#    #+#             */
-/*   Updated: 2026/05/21 20:16:57 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/05/22 01:28:34 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@
 # define ERR_MAP_NOT_RECT 			"Map is not rectangular"
 # define ERR_MAP_BAD_CONTENT 		"Map content is not valid"
 # define ERR_MAP_NOT_ENCLOSED 		"Map is not enclosed"
-# define ERR_PLAYER_NOT_UNIQUE 		"Zero or more than one tile player"
-# define ERR_EXIT_NOT_UNIQUE 		"Zero or more than one tile exit"
+# define ERR_PLAYER_NOT_UNIQUE 		"Zero or more than one player tile exist"
+# define ERR_EXIT_NOT_UNIQUE 		"Zero or more than one exit tile exist"
 # define ERR_MAP_ELEM_NOT_REACHABLE	"Map elements are not reachable"
 # define ERR_NO_COLLECTIBLES		"Map do not have any collectibles"
 # define ERR_TXS_NOT_LOADED			"Textures load failed"
@@ -151,12 +151,16 @@ bool		is_reachable(char **grid, t_coord2d start, t_coord2d target);
 bool		is_suffix_valid(char *s, char *suffix);
 bool		is_map_content_valid(char *ascii);
 bool		is_map_enclosed(char *ascii, int height, int width);
-bool		is_map_playable(char *ascii);
-bool		is_map_valid(t_map *map, char *ascii);
+bool		is_map_playable(char *ascii, int height);
+bool		is_map_valid(char *ascii);
 
 //	MAP
 void		map_init(t_map *map);
 int			map_build(t_map *map, char *ascii);
 int			map_load(t_map *map, char *map_file);
+void		map_clean(t_map *map);
+
+//	PLAYER
+void    	player_init(t_player *player);
 
 #endif

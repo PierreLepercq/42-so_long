@@ -6,7 +6,7 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 12:13:22 by plepercq          #+#    #+#             */
-/*   Updated: 2026/05/21 20:14:48 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/05/22 01:32:57 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,9 @@ char	**gridcpy(char **strs)
 
 bool	flood_fill(char **grid, t_coord2d pos, t_coord2d target)
 {
-	if (grid[pos.y][pos.x] == TILE_WALL || grid[pos.y][pos.x] == TILE_VISITED)
+	if (grid[pos.y][pos.x] == TILE_VISITED
+		|| grid[pos.y][pos.x] == TILE_WALL
+		|| grid[pos.y][pos.x] == TILE_EXIT)
 		return (false);
 	if (pos.x == target.x && pos.y == target.y)
 		return (true);

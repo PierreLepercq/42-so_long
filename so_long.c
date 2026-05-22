@@ -6,7 +6,7 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 15:36:04 by plepercq          #+#    #+#             */
-/*   Updated: 2026/05/21 19:19:36 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/05/22 01:22:38 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ int	game_init(char *map_file)
 {
 	map_init(&game.map);
 	map_load(&game.map, map_file);
-	//player_init(g);
+	player_init(&game.player);
+	game.player.pos = game.map.start;
 	//game.mlx = mlx_init();
 	//if (!game.mlx)
 	//	game_exit(ERR_MLX_INIT_FAILED);
@@ -45,7 +46,9 @@ int	game_clear(void)
 
 int	game_exit(char *err_msg)
 {
-	(void)err_msg;
+	map_clean(&game.map);
+	if (err_msg)
+		print_error(err_msg);
 	return (0);
 }
 
