@@ -6,7 +6,7 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/21 18:30:19 by plepercq          #+#    #+#             */
-/*   Updated: 2026/05/22 00:57:25 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/05/22 18:16:14 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,6 @@ bool	is_map_valid(char *ascii)
 	if (h * TEX_SIZE >= WIN_MAX_HEIGHT || w * TEX_SIZE >= WIN_MAX_WIDTH)
 		return (print_error(ERR_MAP_TOO_BIG), false);
 	if (!is_map_playable(ascii, h))
-		return (print_error(ERR_MAP_TOO_BIG), false);
+		return (print_error(ERR_MAP_IS_NOT_PLAYABLE), false);
 	return (true);
 }

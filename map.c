@@ -6,7 +6,7 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/21 18:12:32 by plepercq          #+#    #+#             */
-/*   Updated: 2026/05/22 01:27:52 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/05/24 18:12:17 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,22 +17,6 @@
 #include "so_long.h"
 #include "ft_split.h"
 #include "read_file.h"
-
-#include <stdio.h>
-
-void	map_print(char **grid)
-{
-	int	y;
-
-	y = 0;
-	while (grid[y])
-	{
-		printf("%s\n", grid[y]);
-		y++;
-	}
-}
-
-
 
 void	map_init(t_map *map)
 {
@@ -55,8 +39,7 @@ int	map_build(t_map *map, char *ascii)
 	map->nbr_collectibles = char_count(ascii, TILE_COLLECTIBLE);
 	map->start = map_find(map->grid, TILE_PLAYER);
 	map->exit = map_find(map->grid, TILE_EXIT);
-	map->grid[map->start.y][map->start.x] = TILE_EMPTY;
-	map_print(map->grid);
+	map->grid[map->start.y][map->start.x] = TILE_GROUND;
 	return (PASS);
 }
 
@@ -80,8 +63,28 @@ int	map_load(t_map *map, char *map_file)
 	return (build);
 }
 
-void	map_clean(t_map *map)
+void	map_clear(t_map *map)
 {
 	freestrs(map->grid, map->height);
 	map_init(map);
+}
+
+void	map_draw(t_game *g)
+{
+	int	y;
+	int x;
+
+	y = 0;
+	while (y < g->map.height)
+	{
+		x = 0;
+		while (x < g->map.width)
+		{
+			write(1, &g->map.grid[y][x], 1);
+			tile_render(g, g->map.grid[y][x], x, y);
+			x++;
+		}
+		write(1, "\n", 1);
+		y++;
+	}
 }

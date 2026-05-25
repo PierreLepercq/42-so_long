@@ -6,7 +6,7 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 15:36:04 by plepercq          #+#    #+#             */
-/*   Updated: 2026/05/22 01:22:38 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/05/24 17:52:39 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,36 +19,48 @@
 
 t_game game;
 
+int	game_exit(char *err_msg)
+{
+	if (game.mlx_win)
+		mlx_destroy_window(game.mlx, game.mlx_win);
+	textures_clear(&game);
+	if (game.mlx)
+	{
+		mlx_destroy_display(game.mlx);
+		free(game.mlx);
+		game.mlx = NULL;
+	}
+	map_clear(&game.map);
+	if (err_msg)
+	{
+		print_error(err_msg);
+		exit(EXIT_FAILURE);
+	}
+	exit(EXIT_SUCCESS);
+}
+
 int	game_init(char *map_file)
 {
 	map_init(&game.map);
-	map_load(&game.map, map_file);
+	if (map_load(&game.map, map_file) == FAIL)
+		game_exit(NULL);
 	player_init(&game.player);
 	game.player.pos = game.map.start;
-	//game.mlx = mlx_init();
-	//if (!game.mlx)
-	//	game_exit(ERR_MLX_INIT_FAILED);
-	//assets_init(g);
-	//g->mlx_win = NULL;
+	game.mlx = mlx_init();
+	if (!game.mlx)
+		game_exit(ERR_MLX_INIT_FAILED);
+	textures_init(game.txs);
+	if (textures_load(&game) == FAIL)
+		game_exit(ERR_TXS_NOT_LOADED);
+	mlx_window_init(&game);
 	return (0);
 }
 
 int	game_launch()
 {
-	//map_draw();
-	return (0);
-}
-
-int	game_clear(void)
-{
-	return (0);
-}
-
-int	game_exit(char *err_msg)
-{
-	map_clean(&game.map);
-	if (err_msg)
-		print_error(err_msg);
+	map_draw(&game);
+	tile_render(&game, TILE_PLAYER, game.player.pos.x, game.player.pos.y);
+	mlx_loop(game.mlx);
 	return (0);
 }
 

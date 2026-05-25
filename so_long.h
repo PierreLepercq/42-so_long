@@ -6,7 +6,7 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 12:09:52 by plepercq          #+#    #+#             */
-/*   Updated: 2026/05/22 01:28:34 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/05/24 18:12:19 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,13 @@
 # define ERR_TXS_NOT_LOADED			"Textures load failed"
 # define ERR_TXS_SIZE_NOT_CORRECT	"Textures size are not 64x64 pixels"
 # define ERR_MLX_INIT_FAILED		"MLX initialisation failed"
+# define ERR_MLX_WIN_INIT_FAILED	"MLX Window initialisation failed"
 # define ERR_MAP_TOO_BIG			"Map size is too big"
+# define ERR_MAP_IS_NOT_PLAYABLE	"Map is not playable"
 
 /*	MAP		*/
 # define MAP_TILES			"0PE1C"
-# define TILE_EMPTY			'0'
+# define TILE_GROUND		'0'
 # define TILE_PLAYER		'P'
 # define TILE_EXIT			'E'
 # define TILE_WALL			'1'
@@ -125,7 +127,7 @@ typedef struct s_game
 {
 	void		*mlx;
 	void		*mlx_win;
-	t_texture	assets[TEX_NBR];
+	t_texture	txs[TEX_NBR];
 	t_map		map;
 	t_player	player;
 }				t_game;
@@ -158,9 +160,29 @@ bool		is_map_valid(char *ascii);
 void		map_init(t_map *map);
 int			map_build(t_map *map, char *ascii);
 int			map_load(t_map *map, char *map_file);
-void		map_clean(t_map *map);
+void		map_clear(t_map *map);
+void		map_draw(t_game *g);
 
 //	PLAYER
 void    	player_init(t_player *player);
+
+//	TEXTURES
+void		tx_init(t_texture *tx);
+void		textures_init(t_texture *txs);
+void		tx_load(void *mlx, t_texture *tx, char *tx_path);
+int			textures_load(t_game *g);
+void		textures_clear(t_game *game);
+
+//	MLX WINDOW
+int			get_tile_index(char tile);
+void		tile_render(t_game *g, char tile, int pos_x, int pos_y);
+void		move(t_game *g, t_coord2d next);
+int			key_hook(int keysym, void *game);
+void 		mlx_window_init(t_game *game);
+
+//	MAIN : SO LONG
+int			game_exit(char *err_msg);
+int			game_init(char *map_file);
+int			game_launch();
 
 #endif
