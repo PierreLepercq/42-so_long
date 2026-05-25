@@ -6,7 +6,7 @@
 #    By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/04/07 18:25:26 by plepercq          #+#    #+#              #
-#    Updated: 2026/05/25 16:20:24 by plepercq         ###   ########.fr        #
+#    Updated: 2026/05/25 21:37:34 by plepercq         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,7 @@ CFILES		= 	so_long.c						\
 				src/mlx_window.c				\
 				src/player.c					\
 				src/print_utils.c				\
+				src/print_error.c				\
 				src/read_file.c					\
 				src/textures.c					\
 
@@ -46,6 +47,7 @@ IMAGES		=	textures/collectible.png		\
 				textures/no_texture.png			\
 				textures/player.png				\
 				textures/wall.png				\
+				textures/win.png				\
 
 TEXTURES	=	$(IMAGES:.png=.xpm)
 
@@ -70,6 +72,19 @@ fclean:
 re: fclean all
 
 good: re clean
+
+test: re
+	@echo -e "\nTests :";
+	./$(NAME);
+	./$(NAME) unknown.ber;
+	./$(NAME) ./maps/tmap_wrong_extension.test;
+	./$(NAME) ./maps/tmap_bad_content.ber;
+	./$(NAME) ./maps/tmap_multiple_E.ber;
+	./$(NAME) ./maps/tmap_multiple_P.ber;
+	./$(NAME) ./maps/tmap_with_nl.ber;
+	./$(NAME) ./maps/tmap_not_rectangular.ber;
+	./$(NAME) ./maps/tmap_not_enclosed.ber;
+	./$(NAME) ./maps/tmap_not_playable.ber;
 
 %.o: %.c
 	$(CC) $(CFLAGS) $(INC) -c $^ -o $@

@@ -6,13 +6,13 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 14:50:22 by plepercq          #+#    #+#             */
-/*   Updated: 2026/05/25 14:53:52 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/05/25 21:37:48 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "ft_string.h"
-#include "print_utils.h"
+#include "print_error.h"
 
 int	splitcount(const char *str, char sep)
 {

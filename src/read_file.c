@@ -6,7 +6,7 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/04 15:57:42 by plepercq          #+#    #+#             */
-/*   Updated: 2026/05/25 15:55:20 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/05/25 21:39:01 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <stdlib.h>			// malloc, free
 #include <unistd.h> 		// read, close
 #include "ft_string.h"		// ft_strjoin
-#include "print_utils.h"
+#include "print_error.h"
 #include "read_file.h"
 
 static char	*str_extend(char **s1, char *s2)

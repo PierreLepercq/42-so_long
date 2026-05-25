@@ -6,7 +6,7 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/21 18:12:32 by plepercq          #+#    #+#             */
-/*   Updated: 2026/05/25 14:54:15 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/05/25 21:38:49 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include "../so_long.h"
 #include "ft_split.h"
 #include "read_file.h"
-#include "print_utils.h"
+#include "print_error.h"
 
 void	map_init(t_map *map)
 {
@@ -73,6 +73,7 @@ void	map_draw(t_game *g)
 {
 	int	y;
 	int	x;
+	int	tile_id;
 
 	y = 0;
 	while (y < g->map.height)
@@ -80,7 +81,8 @@ void	map_draw(t_game *g)
 		x = 0;
 		while (x < g->map.width)
 		{
-			tile_render(g, g->map.grid[y][x], x, y);
+			tile_id = get_tile_index(g->map.grid[y][x]);
+			tile_render(g, g->txs[tile_id].img, x, y);
 			x++;
 		}
 		y++;

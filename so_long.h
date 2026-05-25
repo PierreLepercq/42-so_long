@@ -6,7 +6,7 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 12:09:52 by plepercq          #+#    #+#             */
-/*   Updated: 2026/05/25 18:49:50 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/05/25 21:37:18 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,9 @@
 # define COLLECTIBLE		3
 # define EXIT				4
 # define PLAYER				5
+# define WIN				6
 
-# define TEX_NBR			6
+# define TEX_NBR			7
 # define TEX_SIZE			64
 
 # define TEX_NO_TEX			"./textures/no_texture.xpm"
@@ -59,6 +60,7 @@
 # define TEX_COLLECTIBLE	"./textures/collectible.xpm"
 # define TEX_EXIT			"./textures/exit.xpm"
 # define TEX_PLAYER			"./textures/player.xpm"
+# define TEX_WIN			"./textures/win.xpm"
 
 //	ERRORS
 # define ERR_FILE_NOT_PROVIDED 		"File not provided"
@@ -112,6 +114,12 @@ typedef struct s_game
 	int			win;
 }				t_game;
 
+//	PRINT UTILS
+void		writenbr(int n, int fd);
+void		ft_putnbr_fd(int n, int fd);
+void		print_moves(int nbr_moves);
+void		print_win(t_game *game);
+
 //	MAP UTILS
 int			char_count(char *str, char c);
 int			get_dimensions(char *ascii, int *height, int *width);
@@ -139,6 +147,7 @@ void		map_draw(t_game *g);
 
 //	PLAYER
 void		player_init(t_player *player);
+int			player_move(t_game *g, t_coord2d dest);
 
 //	TEXTURES
 void		tx_init(t_texture *tx);
@@ -149,7 +158,7 @@ void		textures_clear(t_game *game);
 
 //	MLX WINDOW
 int			get_tile_index(char tile);
-void		tile_render(t_game *g, char tile, int pos_x, int pos_y);
+void		tile_render(t_game *g, void *img, int pos_x, int pos_y);
 void		move(t_game *g, t_coord2d next);
 int			key_hook(int keysym, void *game);
 void		mlx_window_init(t_game *game);

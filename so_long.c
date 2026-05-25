@@ -6,14 +6,14 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 15:36:04 by plepercq          #+#    #+#             */
-/*   Updated: 2026/05/25 18:47:40 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/05/25 21:37:09 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <mlx.h>
 #include <stdlib.h>
+#include "print_error.h"
 #include "so_long.h"
-#include "print_utils.h"
 
 int	game_exit(t_game *game, char *err_msg)
 {
@@ -56,8 +56,11 @@ int	game_init(t_game *game, char *map_file)
 
 int	game_launch(t_game *game)
 {
+	void	*player_img;
+
 	map_draw(game);
-	tile_render(game, TILE_PLAYER, game->player.pos.x, game->player.pos.y);
+	player_img = game->txs[get_tile_index(TILE_PLAYER)].img;
+	tile_render(game, player_img, game->player.pos.x, game->player.pos.y);
 	mlx_loop(game->mlx);
 	return (0);
 }
@@ -67,7 +70,10 @@ int	main(int argc, char **argv)
 	t_game	game;
 
 	if (argc != 2)
-		return (print_error("File not provided"), 1);
+	{
+		print_error(ERR_FILE_NOT_PROVIDED);
+		exit(EXIT_SUCCESS);
+	}
 	game_init(&game, argv[1]);
 	game_launch(&game);
 	game_exit(&game, NULL);
