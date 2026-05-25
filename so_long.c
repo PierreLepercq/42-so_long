@@ -6,7 +6,7 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 15:36:04 by plepercq          #+#    #+#             */
-/*   Updated: 2026/05/24 17:52:39 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/05/25 14:10:41 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,20 +17,20 @@
 #include <stdbool.h>
 #include "so_long.h"
 
-t_game game;
+t_game	g_game;
 
 int	game_exit(char *err_msg)
 {
-	if (game.mlx_win)
-		mlx_destroy_window(game.mlx, game.mlx_win);
-	textures_clear(&game);
-	if (game.mlx)
+	if (g_game.mlx_win)
+		mlx_destroy_window(g_game.mlx, g_game.mlx_win);
+	textures_clear(&g_game);
+	if (g_game.mlx)
 	{
-		mlx_destroy_display(game.mlx);
-		free(game.mlx);
-		game.mlx = NULL;
+		mlx_destroy_display(g_game.mlx);
+		free(g_game.mlx);
+		g_game.mlx = NULL;
 	}
-	map_clear(&game.map);
+	map_clear(&g_game.map);
 	if (err_msg)
 	{
 		print_error(err_msg);
@@ -41,26 +41,26 @@ int	game_exit(char *err_msg)
 
 int	game_init(char *map_file)
 {
-	map_init(&game.map);
-	if (map_load(&game.map, map_file) == FAIL)
+	map_init(&g_game.map);
+	if (map_load(&g_game.map, map_file) == FAIL)
 		game_exit(NULL);
-	player_init(&game.player);
-	game.player.pos = game.map.start;
-	game.mlx = mlx_init();
-	if (!game.mlx)
+	player_init(&g_game.player);
+	g_game.player.pos = g_game.map.start;
+	g_game.mlx = mlx_init();
+	if (!g_game.mlx)
 		game_exit(ERR_MLX_INIT_FAILED);
-	textures_init(game.txs);
-	if (textures_load(&game) == FAIL)
+	textures_init(g_game.txs);
+	if (textures_load(&g_game) == FAIL)
 		game_exit(ERR_TXS_NOT_LOADED);
-	mlx_window_init(&game);
+	mlx_window_init(&g_game);
 	return (0);
 }
 
-int	game_launch()
+int	game_launch(void)
 {
-	map_draw(&game);
-	tile_render(&game, TILE_PLAYER, game.player.pos.x, game.player.pos.y);
-	mlx_loop(game.mlx);
+	map_draw(&g_game);
+	tile_render(&g_game, TILE_PLAYER, g_game.player.pos.x, g_game.player.pos.y);
+	mlx_loop(g_game.mlx);
 	return (0);
 }
 

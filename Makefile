@@ -6,7 +6,7 @@
 #    By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/04/07 18:25:26 by plepercq          #+#    #+#              #
-#    Updated: 2026/05/22 17:01:08 by plepercq         ###   ########.fr        #
+#    Updated: 2026/05/25 12:37:50 by plepercq         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,23 +24,19 @@ INC			+= -I $(MLX_LIB)
 
 LINKS		= -L$(MLX_LIB) -l$(MLX) -lXext -lX11 -lm -lz
 
-CFILES		= 	so_long.c			\
-				print_error.c		\
-				coord2d.c			\
-				ft_split.c			\
-				ft_string.c			\
-				read_file.c			\
-				map.c				\
-				map_checks.c		\
-				map_find.c			\
-				map_utils.c			\
-				player.c			\
-				textures.c			\
-				mlx_window.c		\
-
-#				src/coord.c						\
-#				src/map_checks.c				\
-#				src/map_load.c					\
+CFILES		= 	so_long.c				\
+				src/coord2d.c			\
+				src/ft_split.c			\
+				src/ft_string.c			\
+				src/map_checks.c		\
+				src/map_find.c			\
+				src/map_utils.c			\
+				src/map.c				\
+				src/mlx_window.c		\
+				src/player.c			\
+				src/print_error.c		\
+				src/read_file.c			\
+				src/textures.c			\
 
 OBJECTS		= $(CFILES:.c=.o)
 

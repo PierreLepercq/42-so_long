@@ -6,7 +6,7 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 12:09:52 by plepercq          #+#    #+#             */
-/*   Updated: 2026/05/24 18:12:19 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/05/25 14:12:51 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,50 @@
 
 # include <stdbool.h>
 
+//	CUSTOM
 # define PASS	0
 # define FAIL 	1
 
-/*	ERRORS	*/
+//	MLX WINDOW
+# define WIN_TITLE			"So Long"
+# define WIN_MAX_HEIGHT		1080
+# define WIN_MAX_WIDTH		1920
+
+# define KEY_LEFT			65361
+# define KEY_UP				65362
+# define KEY_RIGHT			65363
+# define KEY_DOWN			65364
+# define K_ESC				65307
+
+//	MAP
+# define MAP_TILES			"01CEP"
+
+# define TILE_GROUND		'0'
+# define TILE_WALL			'1'
+# define TILE_COLLECTIBLE	'C'
+# define TILE_EXIT			'E'
+# define TILE_PLAYER		'P'
+# define TILE_VISITED		'V'
+
+//	TEXTURES
+# define NO_TEX				0
+# define GROUND				1
+# define WALL				2
+# define COLLECTIBLE		3
+# define EXIT				4
+# define PLAYER				5
+
+# define TEX_NBR			6
+# define TEX_SIZE			64
+
+# define TEX_NO_TEX			"./textures/no_texture.xpm"
+# define TEX_GROUND			"./textures/ground.xpm"
+# define TEX_WALL			"./textures/wall.xpm"
+# define TEX_COLLECTIBLE	"./textures/collectible.xpm"
+# define TEX_EXIT			"./textures/exit.xpm"
+# define TEX_PLAYER			"./textures/player.xpm"
+
+//	ERRORS
 # define ERR_MEM_ALLOC				"Memory allocation failed"
 # define ERR_OPEN_FILE 				"Unable to open file"
 # define ERR_FILE_NOT_PROVIDED 		"File not provided"
@@ -37,68 +77,11 @@
 # define ERR_MAP_TOO_BIG			"Map size is too big"
 # define ERR_MAP_IS_NOT_PLAYABLE	"Map is not playable"
 
-/*	MAP		*/
-# define MAP_TILES			"0PE1C"
-# define TILE_GROUND		'0'
-# define TILE_PLAYER		'P'
-# define TILE_EXIT			'E'
-# define TILE_WALL			'1'
-# define TILE_COLLECTIBLE	'C'
-# define TILE_VISITED		'V'
-
-/* TEXTURES	*/
-enum {
-	NO_TEX = 0,
-	GROUND = 1,
-	PLAYER = 2,
-	EXIT = 3,
-	WALL = 4,
-	COLLECTIBLE = 5
-};
-# define TEX_NBR		6
-# define TEX_SIZE		64
-
-# define WIN_TITLE		"Soooo Looooooooooong"
-# define WIN_MAX_HEIGHT	1080
-# define WIN_MAX_WIDTH	1920
-
-enum {
-	ON_KEYDOWN = 2,
-	ON_KEYUP = 3,
-	ON_MOUSEDOWN = 4,
-	ON_MOUSEUP = 5,
-	ON_MOUSEMOVE = 6,
-	ON_EXPOSE = 12,
-	ON_DESTROY = 17
-};
-
-/*	TEXTURES - PATH */
-# define TEX_NO_TEX			"./textures/no_texture.xpm"
-# define TEX_GROUND			"./textures/ground.xpm"
-# define TEX_PLAYER			"./textures/player.xpm"
-# define TEX_EXIT			"./textures/exit.xpm"
-# define TEX_WALL			"./textures/wall.xpm"
-# define TEX_COLLECTIBLE	"./textures/collectible.xpm"
-
-# define KEY_LEFT			65361
-# define KEY_UP				65362
-# define KEY_RIGHT			65363
-# define KEY_DOWN			65364
-# define K_ESC				65307
-
 typedef struct s_coord2d
 {
 	int			x;
 	int			y;
 }				t_coord2d;
-
-typedef struct s_player
-{
-	t_coord2d	pos;
-	int			moves;
-	int			state;
-	int			nbr_collectibles;
-}				t_player;
 
 typedef struct s_map
 {
@@ -110,18 +93,20 @@ typedef struct s_map
 	t_coord2d	exit;
 }				t_map;
 
+typedef struct s_player
+{
+	t_coord2d	pos;
+	int			moves;
+	int			state;
+	int			nbr_collectibles;
+}				t_player;
+
 typedef struct s_texture
 {
 	void		*img;
 	int			height;
 	int			width;
 }				t_texture;
-
-typedef struct s_vars
-{
-	void		*mlx;
-	void		*win;
-}				t_vars;
 
 typedef struct s_game
 {
@@ -164,7 +149,7 @@ void		map_clear(t_map *map);
 void		map_draw(t_game *g);
 
 //	PLAYER
-void    	player_init(t_player *player);
+void		player_init(t_player *player);
 
 //	TEXTURES
 void		tx_init(t_texture *tx);
@@ -178,11 +163,11 @@ int			get_tile_index(char tile);
 void		tile_render(t_game *g, char tile, int pos_x, int pos_y);
 void		move(t_game *g, t_coord2d next);
 int			key_hook(int keysym, void *game);
-void 		mlx_window_init(t_game *game);
+void		mlx_window_init(t_game *game);
 
 //	MAIN : SO LONG
 int			game_exit(char *err_msg);
 int			game_init(char *map_file);
-int			game_launch();
+int			game_launch(void);
 
 #endif
