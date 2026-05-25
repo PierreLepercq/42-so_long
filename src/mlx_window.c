@@ -6,13 +6,14 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/22 17:39:45 by plepercq          #+#    #+#             */
-/*   Updated: 2026/05/25 14:45:41 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/05/25 16:36:52 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <mlx.h>
 #include <X11/keysym.h>
 #include "../so_long.h"
+#include "print_utils.h"
 
 int	get_tile_index(char tile)
 {
@@ -46,21 +47,27 @@ void	move(t_game *g, t_coord2d next)
 	t_coord2d	dest;
 
 	play = g->player.pos;
+	if (g->map.grid[play.y][play.x] == TILE_EXIT && g->win)
+		game_exit(NULL);
 	dest = coord2d(play.x + next.x, play.y + next.y);
 	if (g->map.grid[dest.y][dest.x] == TILE_WALL)
 		return ;
 	if (g->map.grid[dest.y][dest.x] == TILE_COLLECTIBLE)
 		g->player.nbr_collectibles++;
-	if (g->map.grid[dest.y][dest.x] == TILE_EXIT)
-	{
-		if (g->player.nbr_collectibles == g->map.nbr_collectibles)
-			game_exit(NULL);
+	if (g->map.grid[dest.y][dest.x] == TILE_EXIT
+		&& g->player.nbr_collectibles != g->map.nbr_collectibles)
 		return ;
-	}
 	tile_render(g, TILE_GROUND, play.x, play.y);
 	tile_render(g, TILE_PLAYER, dest.x, dest.y);
 	g->player.pos = dest;
 	g->player.moves++;
+	if (g->map.grid[dest.y][dest.x] == TILE_EXIT)
+	{
+		g->win = 1;
+		print_win(g->player.moves);
+	}
+	else
+		print_moves(g->player.moves);
 }
 
 int	key_hook(int keysym, void *game)

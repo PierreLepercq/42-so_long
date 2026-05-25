@@ -6,7 +6,7 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 15:36:04 by plepercq          #+#    #+#             */
-/*   Updated: 2026/05/25 14:53:23 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/05/25 16:11:18 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ int	game_exit(char *err_msg)
 
 int	game_init(char *map_file)
 {
+	g_game.win = 0;
 	map_init(&g_game.map);
 	if (map_load(&g_game.map, map_file) == FAIL)
 		game_exit(NULL);

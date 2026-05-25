@@ -6,7 +6,7 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 12:09:52 by plepercq          #+#    #+#             */
-/*   Updated: 2026/05/25 15:09:51 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/05/25 16:26:41 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,13 +77,6 @@
 # define ERR_MAP_TOO_BIG			"Map size is too big"
 # define ERR_MAP_IS_NOT_PLAYABLE	"Map is not playable"
 
-//	PRINTABLE
-# define MSG_WIN	"######################################################\n\n\
-					 				  * YOU WIN *	ᕙ(`▽´)ᕗ				 \n\n\
-					 	Total moves : %i								   \n\
-						Try again to see if you do it in fewer moves ;P	   \n\n\
-					 ######################################################\n"
-
 typedef struct s_map
 {
 	char		**grid;
@@ -116,6 +109,7 @@ typedef struct s_game
 	t_texture	txs[TEX_NBR];
 	t_map		map;
 	t_player	player;
+	int			win;
 }				t_game;
 
 //	MAP UTILS
