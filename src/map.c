@@ -6,17 +6,17 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/21 18:12:32 by plepercq          #+#    #+#             */
-/*   Updated: 2026/05/24 18:12:17 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/05/25 14:54:15 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
-#include <fcntl.h>  		// open
-#include <unistd.h>			// close
-#include <stdlib.h>			// malloc, free
-#include "so_long.h"
+#include <fcntl.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include "../so_long.h"
 #include "ft_split.h"
 #include "read_file.h"
+#include "print_utils.h"
 
 void	map_init(t_map *map)
 {
@@ -72,7 +72,7 @@ void	map_clear(t_map *map)
 void	map_draw(t_game *g)
 {
 	int	y;
-	int x;
+	int	x;
 
 	y = 0;
 	while (y < g->map.height)
@@ -80,11 +80,9 @@ void	map_draw(t_game *g)
 		x = 0;
 		while (x < g->map.width)
 		{
-			write(1, &g->map.grid[y][x], 1);
 			tile_render(g, g->map.grid[y][x], x, y);
 			x++;
 		}
-		write(1, "\n", 1);
 		y++;
 	}
 }

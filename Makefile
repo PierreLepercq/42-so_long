@@ -6,7 +6,7 @@
 #    By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/04/07 18:25:26 by plepercq          #+#    #+#              #
-#    Updated: 2026/05/25 12:37:50 by plepercq         ###   ########.fr        #
+#    Updated: 2026/05/25 15:12:00 by plepercq         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,19 +24,19 @@ INC			+= -I $(MLX_LIB)
 
 LINKS		= -L$(MLX_LIB) -l$(MLX) -lXext -lX11 -lm -lz
 
-CFILES		= 	so_long.c				\
-				src/coord2d.c			\
-				src/ft_split.c			\
-				src/ft_string.c			\
-				src/map_checks.c		\
-				src/map_find.c			\
-				src/map_utils.c			\
-				src/map.c				\
-				src/mlx_window.c		\
-				src/player.c			\
-				src/print_error.c		\
-				src/read_file.c			\
-				src/textures.c			\
+CFILES		= 	so_long.c						\
+				src/coord2d.c					\
+				src/ft_split.c					\
+				src/ft_string.c					\
+				src/map_checks.c				\
+				src/map_find.c					\
+				src/map_utils.c					\
+				src/map.c						\
+				src/mlx_window.c				\
+				src/player.c					\
+				src/print_utils.c				\
+				src/read_file.c					\
+				src/textures.c					\
 
 OBJECTS		= $(CFILES:.c=.o)
 
@@ -62,7 +62,6 @@ $(MLX_LIB):
 
 clean:
 	@rm -vf $(OBJECTS)
-	$(MAKE) -C $(MLX_LIB) clean
 
 fclean:
 	@rm -vf $(NAME) $(OBJECTS)

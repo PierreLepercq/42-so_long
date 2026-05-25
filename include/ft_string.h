@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   coord2d.c                                          :+:      :+:    :+:   */
+/*   ft_string.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/21 18:28:03 by plepercq          #+#    #+#             */
-/*   Updated: 2026/05/25 14:36:58 by plepercq         ###   ########.fr       */
+/*   Created: 2026/04/14 15:55:16 by plepercq          #+#    #+#             */
+/*   Updated: 2026/05/25 14:30:04 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "coord2d.h"
+#ifndef FT_STRING_H
+# define FT_STRING_H
 
-t_coord2d	coord2d(int x, int y)
-{
-	t_coord2d	coord;
+size_t	ft_strlen(const char *s);
+char	*ft_strrchr(const char *s, int c);
+char	*ft_strdup(const char *s);
+char	*ft_substr(char const *s, unsigned int start, size_t len);
+char	*ft_strjoin(char const *s1, char const *s2);
 
-	coord.x = x;
-	coord.y = y;
-	return (coord);
-}
+#endif

@@ -6,14 +6,16 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 12:09:52 by plepercq          #+#    #+#             */
-/*   Updated: 2026/05/25 14:12:51 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/05/25 15:09:51 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
+# include <stddef.h>
 # include <stdbool.h>
+# include "coord2d.h"
 
 //	CUSTOM
 # define PASS	0
@@ -59,8 +61,6 @@
 # define TEX_PLAYER			"./textures/player.xpm"
 
 //	ERRORS
-# define ERR_MEM_ALLOC				"Memory allocation failed"
-# define ERR_OPEN_FILE 				"Unable to open file"
 # define ERR_FILE_NOT_PROVIDED 		"File not provided"
 # define ERR_MAP_FILE_EXT 			"File extension must be '.ber'"
 # define ERR_MAP_NOT_RECT 			"Map is not rectangular"
@@ -77,11 +77,12 @@
 # define ERR_MAP_TOO_BIG			"Map size is too big"
 # define ERR_MAP_IS_NOT_PLAYABLE	"Map is not playable"
 
-typedef struct s_coord2d
-{
-	int			x;
-	int			y;
-}				t_coord2d;
+//	PRINTABLE
+# define MSG_WIN	"######################################################\n\n\
+					 				  * YOU WIN *	ᕙ(`▽´)ᕗ				 \n\n\
+					 	Total moves : %i								   \n\
+						Try again to see if you do it in fewer moves ;P	   \n\n\
+					 ######################################################\n"
 
 typedef struct s_map
 {
@@ -116,12 +117,6 @@ typedef struct s_game
 	t_map		map;
 	t_player	player;
 }				t_game;
-
-//	PRINT ERROR
-void		print_error(const char *err_msg);
-
-//	COORD2D
-t_coord2d	coord2d(int x, int y);
 
 //	MAP UTILS
 int			char_count(char *str, char c);

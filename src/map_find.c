@@ -6,15 +6,15 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 12:13:22 by plepercq          #+#    #+#             */
-/*   Updated: 2026/05/22 18:28:27 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/05/25 14:54:08 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include <stddef.h>
-#include "so_long.h"
+#include "../so_long.h"
 #include "ft_split.h"
 #include "ft_string.h"
+#include "print_utils.h"
 
 char	**gridcpy(char **strs)
 {
@@ -42,6 +42,26 @@ char	**gridcpy(char **strs)
 	}
 	strs_cpy[i] = NULL;
 	return (strs_cpy);
+}
+
+t_coord2d	map_find(char **grid, char tile)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	while (grid[y])
+	{
+		x = 0;
+		while (grid[y][x])
+		{
+			if (grid[y][x] == tile)
+				return (coord2d(x, y));
+			x++;
+		}
+		y++;
+	}
+	return (coord2d(-1, -1));
 }
 
 bool	flood_fill(char **grid, t_coord2d pos, t_coord2d target)

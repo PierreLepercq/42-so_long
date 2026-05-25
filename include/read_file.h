@@ -1,27 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_error.c                                      :+:      :+:    :+:   */
+/*   read_file.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/14 16:38:35 by plepercq          #+#    #+#             */
-/*   Updated: 2026/05/05 15:07:41 by plepercq         ###   ########.fr       */
+/*   Created: 2026/05/04 15:59:24 by plepercq          #+#    #+#             */
+/*   Updated: 2026/05/25 15:44:32 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
-#include <unistd.h>
-#include "print_error.h"
+#ifndef READ_FILE_H
+# define READ_FILE_H
 
-void	print_error(const char *error)
-{
-	int	len;
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 100
+# endif
 
-	len = 0;
-	while (error[len])
-		len++;
-	write(STDERR_FILENO, "Error: ", 7);
-	write(STDERR_FILENO, error, len);
-	write(STDERR_FILENO, "\n", 1);
-}
+char	*read_file(int fd);
+
+#endif

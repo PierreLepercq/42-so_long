@@ -6,12 +6,12 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 15:17:19 by plepercq          #+#    #+#             */
-/*   Updated: 2026/05/14 20:40:59 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/05/25 15:52:56 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
-#include <stdlib.h>		// free, malloc
+#include <stdlib.h>
 #include "ft_string.h"
 
 size_t	ft_strlen(const char *s)
@@ -96,7 +96,6 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	s3 = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
 	if (!s3)
 		return (NULL);
-
 	i = 0;
 	len1 = ft_strlen(s1);
 	len2 = len1 + ft_strlen(s2) + 1;
@@ -105,7 +104,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		if (i < len1)
 			s3[i] = s1[i];
 		else
-			s3[i] = s2[i];
+			s3[i] = s2[i - len1];
 		i++;
 	}
 	return (s3);

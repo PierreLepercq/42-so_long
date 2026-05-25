@@ -6,14 +6,13 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/22 17:39:45 by plepercq          #+#    #+#             */
-/*   Updated: 2026/05/24 18:12:17 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/05/25 14:45:41 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <mlx.h>
-#include <stddef.h>
 #include <X11/keysym.h>
-#include "so_long.h"
+#include "../so_long.h"
 
 int	get_tile_index(char tile)
 {
@@ -56,7 +55,7 @@ void	move(t_game *g, t_coord2d next)
 	{
 		if (g->player.nbr_collectibles == g->map.nbr_collectibles)
 			game_exit(NULL);
-		return;
+		return ;
 	}
 	tile_render(g, TILE_GROUND, play.x, play.y);
 	tile_render(g, TILE_PLAYER, dest.x, dest.y);
@@ -79,9 +78,9 @@ int	key_hook(int keysym, void *game)
 	return (0);
 }
 
-void mlx_window_init(t_game *game)
+void	mlx_window_init(t_game *game)
 {
-    int	win_h;
+	int	win_h;
 	int	win_w;
 
 	win_h = game->map.height * TEX_SIZE;
@@ -89,6 +88,6 @@ void mlx_window_init(t_game *game)
 	game->mlx_win = mlx_new_window(game->mlx, win_w, win_h, WIN_TITLE);
 	if (!game->mlx_win)
 		game_exit(ERR_MLX_WIN_INIT_FAILED);
-    mlx_key_hook(game->mlx_win, key_hook, game);
-	mlx_hook(game->mlx_win, 17, 0L, game_exit, NULL);
+	mlx_key_hook(game->mlx_win, key_hook, game);
+	mlx_hook(game->mlx_win, 17, 0L, (void *)game_exit, NULL);
 }

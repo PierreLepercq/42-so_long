@@ -6,16 +6,14 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 15:36:04 by plepercq          #+#    #+#             */
-/*   Updated: 2026/05/25 14:10:41 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/05/25 14:53:23 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <mlx.h>
-#include <stdio.h>
-#include <stddef.h>			// NULL
-#include <stdlib.h>			// malloc, free
-#include <stdbool.h>
+#include <stdlib.h>
 #include "so_long.h"
+#include "print_utils.h"
 
 t_game	g_game;
 

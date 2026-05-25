@@ -6,13 +6,12 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/22 15:21:27 by plepercq          #+#    #+#             */
-/*   Updated: 2026/05/25 14:01:58 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/05/25 14:41:48 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <mlx.h>
-#include <stddef.h>
-#include "so_long.h"
+#include "../so_long.h"
 
 void	tx_init(t_texture *tx)
 {
@@ -60,7 +59,7 @@ int	textures_load(t_game *g)
 
 void	textures_clear(t_game *game)
 {
-		int	i;
+	int	i;
 
 	if (!game->mlx)
 		return ;

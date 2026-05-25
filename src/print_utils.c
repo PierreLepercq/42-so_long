@@ -1,22 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   coord2d.c                                          :+:      :+:    :+:   */
+/*   print_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/21 18:28:03 by plepercq          #+#    #+#             */
-/*   Updated: 2026/05/25 14:36:58 by plepercq         ###   ########.fr       */
+/*   Created: 2026/04/14 16:38:35 by plepercq          #+#    #+#             */
+/*   Updated: 2026/05/25 14:54:44 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "coord2d.h"
+#include <unistd.h>
+#include "print_utils.h"
 
-t_coord2d	coord2d(int x, int y)
+void	print_error(const char *err_msg)
 {
-	t_coord2d	coord;
+	int	len;
 
-	coord.x = x;
-	coord.y = y;
-	return (coord);
+	len = 0;
+	while (err_msg[len])
+		len++;
+	write(STDERR_FILENO, "Error: ", 7);
+	write(STDERR_FILENO, err_msg, len);
+	write(STDERR_FILENO, "\n", 1);
 }

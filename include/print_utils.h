@@ -1,22 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   coord2d.c                                          :+:      :+:    :+:   */
+/*   print_utils.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/21 18:28:03 by plepercq          #+#    #+#             */
-/*   Updated: 2026/05/25 14:36:58 by plepercq         ###   ########.fr       */
+/*   Created: 2026/04/14 16:42:26 by plepercq          #+#    #+#             */
+/*   Updated: 2026/05/25 14:53:39 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "coord2d.h"
+#ifndef PRINT_UTILS_H
+# define PRINT_UTILS_H
 
-t_coord2d	coord2d(int x, int y)
-{
-	t_coord2d	coord;
+# define ERR_MEM_ALLOC				"Memory allocation failed"
+# define ERR_OPEN_FILE 				"Unable to open file"
 
-	coord.x = x;
-	coord.y = y;
-	return (coord);
-}
+void	print_error(const char *err_msg);
+
+#endif

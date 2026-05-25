@@ -6,16 +6,15 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/21 18:30:19 by plepercq          #+#    #+#             */
-/*   Updated: 2026/05/22 18:16:14 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/05/25 15:55:30 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
 #include <stdlib.h>
-#include <stdbool.h>
-#include "so_long.h"
+#include "../so_long.h"
 #include "ft_split.h"
 #include "ft_string.h"
+#include "print_utils.h"
 
 bool	is_suffix_valid(char *s, char *suffix)
 {
