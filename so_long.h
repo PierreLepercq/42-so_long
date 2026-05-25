@@ -6,7 +6,7 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 12:09:52 by plepercq          #+#    #+#             */
-/*   Updated: 2026/05/25 16:26:41 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/05/25 18:49:50 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,8 @@
 # define ERR_EXIT_NOT_UNIQUE 		"Zero or more than one exit tile exist"
 # define ERR_MAP_ELEM_NOT_REACHABLE	"Map elements are not reachable"
 # define ERR_NO_COLLECTIBLES		"Map do not have any collectibles"
-# define ERR_TXS_NOT_LOADED			"Textures load failed"
-# define ERR_TXS_SIZE_NOT_CORRECT	"Textures size are not 64x64 pixels"
+# define ERR_TX_NOT_LOADED			"Texture load failed"
+# define ERR_TX_SIZE_NOT_CORRECT	"Texture size is not 64x64 pixels"
 # define ERR_MLX_INIT_FAILED		"MLX initialisation failed"
 # define ERR_MLX_WIN_INIT_FAILED	"MLX Window initialisation failed"
 # define ERR_MAP_TOO_BIG			"Map size is too big"
@@ -143,8 +143,8 @@ void		player_init(t_player *player);
 //	TEXTURES
 void		tx_init(t_texture *tx);
 void		textures_init(t_texture *txs);
-void		tx_load(void *mlx, t_texture *tx, char *tx_path);
-int			textures_load(t_game *g);
+void		tx_load(t_game *g, t_texture *tx, char *tx_path);
+void		textures_load(t_game *g);
 void		textures_clear(t_game *game);
 
 //	MLX WINDOW
@@ -155,8 +155,8 @@ int			key_hook(int keysym, void *game);
 void		mlx_window_init(t_game *game);
 
 //	MAIN : SO LONG
-int			game_exit(char *err_msg);
-int			game_init(char *map_file);
-int			game_launch(void);
+int			game_exit(t_game *game, char *err_msg);
+int			game_init(t_game *game, char *map_file);
+int			game_launch(t_game *game);
 
 #endif

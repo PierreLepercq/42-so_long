@@ -6,7 +6,7 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 15:17:19 by plepercq          #+#    #+#             */
-/*   Updated: 2026/05/25 15:52:56 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/05/25 18:49:02 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		return (NULL);
 	i = 0;
 	len1 = ft_strlen(s1);
-	len2 = len1 + ft_strlen(s2) + 1;
+	len2 = len1 + ft_strlen(s2);
 	while (i < len2)
 	{
 		if (i < len1)
@@ -107,5 +107,6 @@ char	*ft_strjoin(char const *s1, char const *s2)
 			s3[i] = s2[i - len1];
 		i++;
 	}
+	s3[i] = '\0';
 	return (s3);
 }

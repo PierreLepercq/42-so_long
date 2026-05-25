@@ -6,7 +6,7 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/22 17:39:45 by plepercq          #+#    #+#             */
-/*   Updated: 2026/05/25 16:36:52 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/05/25 18:36:23 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	move(t_game *g, t_coord2d next)
 
 	play = g->player.pos;
 	if (g->map.grid[play.y][play.x] == TILE_EXIT && g->win)
-		game_exit(NULL);
+		game_exit(g, NULL);
 	dest = coord2d(play.x + next.x, play.y + next.y);
 	if (g->map.grid[dest.y][dest.x] == TILE_WALL)
 		return ;
@@ -81,7 +81,7 @@ int	key_hook(int keysym, void *game)
 	if (keysym == 'd' || keysym == KEY_RIGHT)
 		move(game, coord2d(1, 0));
 	if (keysym == K_ESC)
-		game_exit(NULL);
+		game_exit(game, NULL);
 	return (0);
 }
 
@@ -94,7 +94,7 @@ void	mlx_window_init(t_game *game)
 	win_w = game->map.width * TEX_SIZE;
 	game->mlx_win = mlx_new_window(game->mlx, win_w, win_h, WIN_TITLE);
 	if (!game->mlx_win)
-		game_exit(ERR_MLX_WIN_INIT_FAILED);
+		game_exit(game, ERR_MLX_WIN_INIT_FAILED);
 	mlx_key_hook(game->mlx_win, key_hook, game);
-	mlx_hook(game->mlx_win, 17, 0L, (void *)game_exit, NULL);
+	mlx_hook(game->mlx_win, 17, 0L, (void *)game_exit, game);
 }

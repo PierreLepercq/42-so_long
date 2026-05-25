@@ -6,7 +6,7 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/22 15:21:27 by plepercq          #+#    #+#             */
-/*   Updated: 2026/05/25 14:41:48 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/05/25 18:49:37 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,31 +30,23 @@ void	textures_init(t_texture *txs)
 	tx_init(&txs[COLLECTIBLE]);
 }
 
-void	tx_load(void *mlx, t_texture *tx, char *tx_path)
+void	tx_load(t_game *g, t_texture *tx, char *tx_path)
 {
-	tx->img = mlx_xpm_file_to_image(mlx, tx_path, &tx->width, &tx->height);
+	tx->img = mlx_xpm_file_to_image(g->mlx, tx_path, &tx->width, &tx->height);
+	if (!tx->img)
+		game_exit(g, ERR_TX_NOT_LOADED);
 	if (tx->height != TEX_SIZE || tx->width != TEX_SIZE)
-		game_exit(ERR_TXS_SIZE_NOT_CORRECT);
+		game_exit(g, ERR_TX_SIZE_NOT_CORRECT);
 }
 
-int	textures_load(t_game *g)
+void	textures_load(t_game *g)
 {
-	int	i;
-
-	tx_load(g->mlx, &g->txs[NO_TEX], "./textures/no_texture.xpm");
-	tx_load(g->mlx, &g->txs[GROUND], "./textures/ground.xpm");
-	tx_load(g->mlx, &g->txs[WALL], "./textures/wall.xpm");
-	tx_load(g->mlx, &g->txs[PLAYER], "./textures/player.xpm");
-	tx_load(g->mlx, &g->txs[EXIT], "./textures/exit.xpm");
-	tx_load(g->mlx, &g->txs[COLLECTIBLE], "./textures/collectible.xpm");
-	i = 0;
-	while (i < TEX_NBR)
-	{
-		if (!g->txs[i].img)
-			return (1);
-		i++;
-	}
-	return (0);
+	tx_load(g, &g->txs[NO_TEX], TEX_NO_TEX);
+	tx_load(g, &g->txs[GROUND], TEX_GROUND);
+	tx_load(g, &g->txs[WALL], TEX_WALL);
+	tx_load(g, &g->txs[PLAYER], TEX_PLAYER);
+	tx_load(g, &g->txs[EXIT], TEX_EXIT);
+	tx_load(g, &g->txs[COLLECTIBLE], TEX_COLLECTIBLE);
 }
 
 void	textures_clear(t_game *game)

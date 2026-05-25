@@ -6,7 +6,7 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/21 18:52:48 by plepercq          #+#    #+#             */
-/*   Updated: 2026/05/25 14:40:22 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/05/25 18:14:02 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	get_dimensions(char *ascii, int *height, int *width)
 
 	h = 0;
 	w = 0;
-	while (ascii[w] != '\n')
+	while (ascii[w] && ascii[w] != '\n')
 		w++;
 	while (*ascii)
 	{
@@ -43,7 +43,9 @@ int	get_dimensions(char *ascii, int *height, int *width)
 		sublen = substrlen(ascii, '\n');
 		if (sublen != w)
 			return (1);
-		ascii += sublen + 1;
+		if (ascii[sublen] == '\n')
+			sublen++;
+		ascii += sublen;
 	}
 	if (h < 3 || w < 3)
 		return (1);
