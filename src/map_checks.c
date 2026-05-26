@@ -6,7 +6,7 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/21 18:30:19 by plepercq          #+#    #+#             */
-/*   Updated: 2026/05/25 21:38:34 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/05/25 21:53:12 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ bool	is_map_enclosed(char *ascii, int height, int width)
 			return (false);
 		if (i % mod_nl == width - 1 && ascii[i] != TILE_WALL)
 			return (false);
-		if (i / mod_nl == 0 || i / mod_nl == height)
+		if (i / mod_nl == 0 || i / mod_nl == height - 1)
 		{
 			if (i % mod_nl <= width - 1 && ascii[i] != TILE_WALL)
 				return (false);

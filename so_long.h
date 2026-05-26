@@ -6,7 +6,7 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 12:09:52 by plepercq          #+#    #+#             */
-/*   Updated: 2026/05/25 21:37:18 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/05/26 03:19:12 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,10 @@
 # define COLLECTIBLE		3
 # define EXIT				4
 # define PLAYER				5
-# define WIN				6
+# define EXIT_OPEN			6
+# define EXIT_WIN			7
 
-# define TEX_NBR			7
+# define TEX_NBR			8
 # define TEX_SIZE			64
 
 # define TEX_NO_TEX			"./textures/no_texture.xpm"
@@ -60,7 +61,8 @@
 # define TEX_COLLECTIBLE	"./textures/collectible.xpm"
 # define TEX_EXIT			"./textures/exit.xpm"
 # define TEX_PLAYER			"./textures/player.xpm"
-# define TEX_WIN			"./textures/win.xpm"
+# define TEX_EXIT_OPEN		"./textures/exit_open.xpm"
+# define TEX_EXIT_WIN		"./textures/exit_win.xpm"
 
 //	ERRORS
 # define ERR_FILE_NOT_PROVIDED 		"File not provided"

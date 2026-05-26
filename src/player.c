@@ -6,7 +6,7 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/22 01:11:41 by plepercq          #+#    #+#             */
-/*   Updated: 2026/05/25 21:32:34 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/05/26 03:17:41 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ int	player_move(t_game *g, t_coord2d dest)
 	{
 		g->map.grid[dest.y][dest.x] = TILE_GROUND;
 		g->player.nbr_collectibles++;
+		if (g->player.nbr_collectibles == g->map.nbr_collectibles)
+			tile_render(g, g->txs[EXIT_OPEN].img, g->map.exit.x, g->map.exit.y);
 	}
 	if (g->map.grid[dest.y][dest.x] == TILE_EXIT
 		&& g->player.nbr_collectibles == g->map.nbr_collectibles)

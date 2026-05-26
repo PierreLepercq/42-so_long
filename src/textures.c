@@ -6,7 +6,7 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/22 15:21:27 by plepercq          #+#    #+#             */
-/*   Updated: 2026/05/25 20:55:48 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/05/26 03:20:13 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ void	textures_init(t_texture *txs)
 	tx_init(&txs[PLAYER]);
 	tx_init(&txs[EXIT]);
 	tx_init(&txs[COLLECTIBLE]);
-	tx_init(&txs[WIN]);
+	tx_init(&txs[EXIT_OPEN]);
+	tx_init(&txs[EXIT_WIN]);
 }
 
 void	tx_load(t_game *g, t_texture *tx, char *tx_path)
@@ -48,7 +49,8 @@ void	textures_load(t_game *g)
 	tx_load(g, &g->txs[PLAYER], TEX_PLAYER);
 	tx_load(g, &g->txs[EXIT], TEX_EXIT);
 	tx_load(g, &g->txs[COLLECTIBLE], TEX_COLLECTIBLE);
-	tx_load(g, &g->txs[WIN], TEX_WIN);
+	tx_load(g, &g->txs[EXIT_OPEN], TEX_EXIT_OPEN);
+	tx_load(g, &g->txs[EXIT_WIN], TEX_EXIT_WIN);
 }
 
 void	textures_clear(t_game *game)

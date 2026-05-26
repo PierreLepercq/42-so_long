@@ -6,7 +6,7 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/22 17:39:45 by plepercq          #+#    #+#             */
-/*   Updated: 2026/05/25 21:24:38 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/05/26 03:18:12 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	move(t_game *g, t_coord2d next)
 	if (player_move(g, dest) == FAIL)
 		return ;
 	if (g->map.grid[dest.y][dest.x] == TILE_EXIT && g->win)
-		tile_render(g, g->txs[WIN].img, dest.x, dest.y);
+		tile_render(g, g->txs[EXIT_WIN].img, dest.x, dest.y);
 	else
 		tile_render(g, g->txs[PLAYER].img, dest.x, dest.y);
 	tile_id = get_tile_index(g->map.grid[prev.y][prev.x]);

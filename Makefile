@@ -6,7 +6,7 @@
 #    By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/04/07 18:25:26 by plepercq          #+#    #+#              #
-#    Updated: 2026/05/25 21:37:34 by plepercq         ###   ########.fr        #
+#    Updated: 2026/05/26 03:43:49 by plepercq         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,8 @@ IMAGES		=	textures/collectible.png		\
 				textures/no_texture.png			\
 				textures/player.png				\
 				textures/wall.png				\
-				textures/win.png				\
+				textures/exit_open.png			\
+				textures/exit_win.png			\
 
 TEXTURES	=	$(IMAGES:.png=.xpm)
 

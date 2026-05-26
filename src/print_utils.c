@@ -6,7 +6,7 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/14 16:38:35 by plepercq          #+#    #+#             */
-/*   Updated: 2026/05/25 21:34:41 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/05/25 21:59:20 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,6 @@ void	print_win(t_game *g)
 	write(1, "                * YOU WIN *  ᕙ (`▽ ´)ᕗ\n\n", 47);
 	write(1, "  Total moves : ", 16);
 	ft_putnbr_fd(g->player.moves, 1);
-	write(1, "\n  Try again to see if you can do it in fewer moves ;P\n", 55);
+	write(1, "\n  Try again to see if you can do it in fewer moves!\n", 53);
 	write(1, "#######################################################\n", 56);
 }
